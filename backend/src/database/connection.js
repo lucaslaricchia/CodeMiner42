@@ -1,4 +1,4 @@
-import { createConnection } from 'typeorm';
+const createConnection = require('typeorm') ;
 
 createConnection();
 

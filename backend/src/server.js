@@ -1,12 +1,12 @@
-import express from 'express';
+const express = require('express');
 
-import cors from 'cors';
+const cors = require('cors');
 
-import 'express-async-errors';
-import './database/connection';
+require('express-async-errors');
+require('./database/connection');
 
-import routes from './routes';
-import errorHandler from './errors/handler';
+const routes = require('./routes');
+const errorHandler = require('./errors/handler');
 
 const app = express();
 

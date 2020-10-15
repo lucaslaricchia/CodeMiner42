@@ -1,6 +1,6 @@
-import { Router } from 'express';
+const Router = require('express');
 
-import SurvivorController from './controllers/SurvivorController';
+const SurvivorController = require('./controllers/SurvivorController');
 
 const routes = Router();
 
