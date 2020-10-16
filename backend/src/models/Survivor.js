@@ -1,33 +1,37 @@
-import { EntitySchema } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
 
-export const Survivor = new EntitySchema({
-  name: 'survivors',
-  columns: {
-    id: {
-      type: Number,
-      primary: true,
-      generated: true,
-    },
-    name: {
-      type: String,
-    },
-    age: {
-      type: Number,
-    },
-    gender: {
-      type: String,
-    },
-    infected: {
-      type: Boolean,
-    },
-    infected_reports: {
-      type: Number,
-    },
-    latitude: {
-      type: Number,
-    },
-    longitude: {
-      type: Number,
-    },
-  },
-})
+import Inventory from './Inventory';
+
+@Entity('survivors')
+export default class Survivor {
+
+    @PrimaryGeneratedColumn('increment')
+    id;
+
+    @Column('varchar')
+    name;
+
+    @Column('integer')
+    age;
+
+    @Column('varchar')
+    gender;
+
+    @Column('boolean')
+    infected;
+
+    @Column('integer')
+    infected_reports;
+    
+    @Column('decimal')
+    latitude;
+
+    @Column('decimal')
+    longitude;
+
+    @OneToOne(()=> Inventory, inventory => inventory.survivor, {
+        cascade: ['insert' , 'update']
+    })
+    @JoinColumn({ name: 'id' })
+    inventory;
+}

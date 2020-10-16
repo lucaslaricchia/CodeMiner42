@@ -4,7 +4,7 @@
    "main": "index.js",
    "license": "MIT",
    "scripts": {
-      "dev": "nodemon --exec sucrase-node src/server.js",
+      "dev": "babel-node src/server.js",
       "typeorm": "babel-node ./node_modules/typeorm/cli.js"
       
    },
