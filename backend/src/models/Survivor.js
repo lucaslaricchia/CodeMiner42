@@ -1,37 +1,36 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToOne,
+  JoinColumn,
+} from 'typeorm'
 
-import Inventory from './Inventory';
+import Inventory from './Inventory'
 
 @Entity('survivors')
 export default class Survivor {
+  @PrimaryGeneratedColumn('increment')
+  id = null
 
-    @PrimaryGeneratedColumn('increment')
-    id;
+  @Column('varchar')
+  name = ''
 
-    @Column('varchar')
-    name;
+  @Column('integer')
+  age = 0
 
-    @Column('integer')
-    age;
+  @Column('varchar')
+  gender = ''
 
-    @Column('varchar')
-    gender;
+  @Column('boolean')
+  infected = false
 
-    @Column('boolean')
-    infected;
+  @Column('integer')
+  infected_reports = 0
 
-    @Column('integer')
-    infected_reports;
-    
-    @Column('decimal')
-    latitude;
+  @Column('decimal')
+  latitude = 0
 
-    @Column('decimal')
-    longitude;
-
-    @OneToOne(()=> Inventory, inventory => inventory.survivor, {
-        cascade: ['insert' , 'update']
-    })
-    @JoinColumn({ name: 'id' })
-    inventory;
+  @Column('decimal')
+  longitude = 0
 }

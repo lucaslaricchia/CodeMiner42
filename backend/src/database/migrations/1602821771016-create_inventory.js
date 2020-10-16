@@ -15,16 +15,7 @@ export class createInventory1602821771016 {
             generationStrategy: 'increment',
           },
         ],
-        foreignKeys: [
-          {
-            name: 'SurvivorInventory',
-            columnNames: ['id'],
-            referencedTableName: 'survivors',
-            referencedColumnNames: ['id'],
-            onUpdate: 'CASCADE',
-            onDelete: 'CASCADE',
-          },
-        ],
+
       })
     )
   }

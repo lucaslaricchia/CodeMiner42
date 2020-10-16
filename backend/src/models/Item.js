@@ -4,12 +4,12 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 @Entity('item')
 export default class Item {
     @PrimaryGeneratedColumn('increment')
-    id;
+    id = null
 
     @Column('varchar')
-    name;
+    name = ''
 
     @Column('integer')
-    points;
+    points = 0
 
 }

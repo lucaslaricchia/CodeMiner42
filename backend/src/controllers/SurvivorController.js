@@ -36,6 +36,7 @@ export default {
     let survivor = await survivorsRepository.findOneOrFail(id)
 
     delete request.body.id
+    delete request.body.name
     Object.keys(request.body).forEach((key) => {
       const item = request.body[key]
       if (item) {
