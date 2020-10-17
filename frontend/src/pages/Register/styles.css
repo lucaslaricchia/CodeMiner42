@@ -1,0 +1,116 @@
+.register-container {
+  width: 100%;
+  max-width: 1120px;
+  height: 100vh;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.register-container .content {
+  width: 100%;
+  padding: 96px;
+  background: none;
+
+  border-radius: 8px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.register-container .content section {
+  width: 100%;
+  max-width: 380px;
+}
+
+.register-container .content section h1 {
+  margin: 64px 0 32px;
+  font-size: 32px;
+  color: #eb0b0b;
+}
+
+.register-container .content p {
+  font-family: "Macondo";
+  font-size: 70px;
+  color: #40be06;
+  line-height: 32px;
+  font-weight: bold;
+  word-spacing: 0.2em;
+  letter-spacing: 0.17em;
+  margin-bottom: 30px;
+}
+
+.register-container .content form {
+  width: 100%;
+  max-width: 450px;
+}
+
+.register-container .content form h2 {
+  font-size: 24px;
+  color: rgb(241, 228, 228);
+}
+
+.register-container .content form h3 {
+    font-size: 20px;
+    margin-bottom: 5px;
+    color: rgb(241, 228, 228);
+  }
+
+.register-container .content form input {
+  margin-top: 8px;
+}
+
+.register-container .content form img {
+  width: 100%;
+  max-width: 450px;
+}
+
+.register-container .content form .input-group {
+  display: flex;
+}
+
+.register-container .content form .input-group input + input {
+  margin-left: 8px;
+}
+
+.register-container .content form .leaflet-container {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  border-radius: 8px;
+  border: 1px solid rgb(6, 5, 85);
+}
+
+.register-container .content .button-select {
+  display: flex;
+}
+
+.register-container .content .button-select button {
+  width: 50%;
+  height: 50px;
+  background: #ffffff;
+  border: 1px solid #f6f6f7;
+  color: #010202;
+  cursor: pointer;
+}
+
+.register-container .content .button-select button.active {
+  background: #40be06;
+  border: 1px solid #a1e9c5;
+  color: black;
+}
+
+.register-container .content .button-select button:first-child {
+  border-radius: 8px 0px 0px 8px;
+}
+
+.register-container .content .button-select button:last-child {
+  border-radius: 0px 8px 8px 0px;
+  border-left: 0;
+}
