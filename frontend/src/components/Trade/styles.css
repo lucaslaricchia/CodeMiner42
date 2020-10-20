@@ -1,0 +1,16 @@
+.wrapper{
+    display: flex;
+    background: white;
+    width: 700px;
+
+    justify-content: space-between  ;
+}
+
+.trade-container .item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.trade-container .item input{
+    width: 20%;
+}

@@ -17,14 +17,16 @@ export default function Register() {
     latitude: "",
     longitude: "",
   });
-  const [items, setItems] = useState("Fiji Water:10;Campbell Soup:5");
+  const [items, setItems] = useState(
+    "Fiji Water:10;Campbell Soup:5;First Aid Pouch:10;AK47: 1"
+  );
   const history = useHistory();
 
   function handleMapClick(e) {
     const { lat, lng } = e.latlng;
     setPosition({ longitude: lng, latitude: lat });
-    console.log(initialPosition)
-    console.log(position)
+    console.log(initialPosition);
+    console.log(position);
   }
 
   async function handleRegister(e) {
@@ -69,12 +71,11 @@ export default function Register() {
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
       });
-    }, setInitialPosition({latitude: 0, longitude: 0}));
+    }, setInitialPosition({ latitude: 0, longitude: 0 }));
   }, []);
 
   return (
     <div className="register-container">
-      
       <div className="content">
         <p>The Resident Zombie</p>
         <section>
@@ -101,7 +102,7 @@ export default function Register() {
               center={
                 initialPosition.latitude !== 0
                   ? [initialPosition.latitude, initialPosition.longitude]
-                  : [-5.81740205715448, -35.207336421590306]
+                  : [-5.7937409, -35.2040634]
               }
               style={{ width: "100%", height: 280 }}
               zoom={15}
@@ -135,6 +136,8 @@ export default function Register() {
               Male
             </button>
           </div>
+
+          <h3>How many items do you have?</h3>
           <button className="button">Sign up</button>
         </form>
       </div>
