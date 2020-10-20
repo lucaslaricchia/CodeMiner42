@@ -10,10 +10,12 @@ export default function Trade() {
   const [nameSurvivor2, setNameSurvivor] = useState("");
   const [survivor1Inventory, setSurvivor1Inventory] = useState([]);
   const [survivor2Inventory, setSurvivor2Inventory] = useState([]);
-  const [tradeInventory1, setTradeInventory1] = useState([0,0,0,0]);
-  const [tradeInventory2, setTradeInventory2] = useState([0, 0, 0, 0]);
+  const [tradeInventory1, setTradeInventory1] = useState([]);
+  const [tradeInventory2, setTradeInventory2] = useState([]);
   const [pointsTradeInventory1, setPointsTradeInventory1] = useState(0);
   const [pointsTradeInventory2, setPointsTradeInventory2] = useState(0);
+  const [stringPick, setStringPick] = useState("");
+  const [stringPayment, setStringPayment] = useState("");
 
   async function loadSuvivors() {
     const { data } = await api.get("api/people.json");
@@ -141,15 +143,25 @@ export default function Trade() {
   }
 
   async function handleTrade() {
-    console.log(tradeInventory1)
-    console.log(tradeInventory2)
-    const stringPayment = `Fiji Water:${tradeInventory1[0]};Campbell Soup:${tradeInventory1[1]};First Aid Pouch:${tradeInventory1[2]};AK47:${tradeInventory1[3]}`;
-    const stringPick = `Fiji Water:${tradeInventory2[0]};Campbell Soup:${tradeInventory2[1]};First Aid Pouch:${tradeInventory2[2]};AK47:${tradeInventory2[3]}`;
+    let payment = [];
+    tradeInventory1.forEach((item, index) => {
+      if (item !== "0") {
+        payment.push(`${survivor1Inventory[index].item.name}:${item}`);
+      }
+    });
+
+    let pick = [];
+    tradeInventory2.forEach((item, index) => {
+      if (item !== "0") {
+        pick.push(`${survivor2Inventory[index].item.name}:${item}`);
+      }
+    });
+
     const data = {
       "consumer": {
         "name": nameSurvivor2,
-        "pick": stringPick,
-        "payment": stringPayment,
+        "pick": pick.join(";"),
+        "payment": payment.join(";"),
       },
     };
     const response = await api.post(
