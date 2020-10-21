@@ -1,9 +1,0 @@
-.trade-container {
-    width: 100vw;
-    max-width: 1120px;
-    height: 100vh;
-    margin: 0 auto;
-    
-    display: grid;
-    grid-template-rows: 1fr 5fr 1fr;
-  }

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { FiArrowLeft } from "react-icons/fi";
 import { Map, Marker, TileLayer } from "react-leaflet";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import api from "../../services/api";
 import "leaflet/dist/leaflet.css";
@@ -36,7 +35,10 @@ export default function Register() {
 
   async function handleRegister(e) {
     e.preventDefault();
-
+    if(position.latitude === "0"){
+      alert("Please select a location on map.")
+      return
+    }
     let itemString = [];
 
     Object.keys(items).forEach((key) => {
@@ -70,7 +72,7 @@ export default function Register() {
       const response = await api.post("api/people.json", data);
 
       alert(`Seu ID de acesso: ${response.data.id}`);
-      history.push("/");
+      history.push("/landing");
     } catch (err) {
       alert("Erro no cadastro, tente novamente");
     }
@@ -95,11 +97,13 @@ export default function Register() {
             <input
               placeholder="Name"
               value={name}
+              required={true}
               onChange={(e) => setName(e.target.value)}
             />
             <input
               placeholder="Age"
               value={age}
+              required={true}
               onChange={(e) => setAge(e.target.value)}
             />
           </div>
@@ -192,7 +196,9 @@ export default function Register() {
                 max="99"
               />
             </div>
+            
           </div>
+          <p>We will belive you.</p>
           <button className="button">Register</button>
         </form>
       </div>

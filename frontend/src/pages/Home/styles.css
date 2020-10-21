@@ -22,15 +22,8 @@
   justify-content: space-between;
 
 }
-#page-landing .content-wrapper img {
-  width: 100x;
-  height: 130px;
-}
-#page-landing .content-wrapper main {
-  max-width: 350px;
-}
-
 #page-landing .content-wrapper main h1 {
+  width: 40%;
   text-shadow: 2px 3px 0px #898999;
   font-size: 76px;
   font-weight: 900;
@@ -38,24 +31,16 @@
   color:  #FFF;
 }
 
-#page-landing .content-wrapper main p {
-  margin-top: 40px;
-  font-size: 24px;
-  line-height: 34px;
-}
+#page-landing .content-wrapper main h2 {
+  text-shadow: 2px 3px 0px #898999;
+  font-size: 76px;
+  font-weight: 900;
+  line-height: 70px;
+  color:  #FFF;
 
-.content-wrapper .location {
   position: absolute;
-  right: 0;
-  top: 0;
-
-  font-size: 24px;
-  line-height: 34px;
-
-  display: flex;
-  flex-direction: column;
-
-  text-align: right;
+  bottom: 2%;
+  left: 0%;
 }
 
 .content-wrapper .location storng {

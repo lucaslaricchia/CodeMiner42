@@ -96,6 +96,7 @@
   background: #ffffff;
   color: #010202;
   cursor: pointer;
+  
 }
 
 .register-container .content .button-select button.active {
@@ -121,7 +122,6 @@
 
   background: #FFF;
   border-radius: 5px;
-  margin-bottom: 10px;
 }
 
 .register-container .content .inventory-items .item{
@@ -131,7 +131,7 @@
 }
 
 .register-container .content .inventory-items .item p{
-  font-size: 20px;
+  font-size: 17px;
   color: rgb(0, 0, 0);
   
   text-align: start;
@@ -150,4 +150,5 @@
 .button{
   width: 200px;
   height: 50px;
+  margin-top: 10px;
 }

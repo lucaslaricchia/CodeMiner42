@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { isEmpty } from "lodash";
 import api from "../../services/api";
 import "./styles.css";
@@ -14,7 +15,7 @@ export default function Trade() {
   const [tradeInventory2, setTradeInventory2] = useState([]);
   const [pointsTradeInventory1, setPointsTradeInventory1] = useState(0);
   const [pointsTradeInventory2, setPointsTradeInventory2] = useState(0);
-
+  const history = useHistory();
   async function loadSuvivors() {
     const { data } = await api.get("api/people.json");
     setSurvivors(data);
@@ -37,10 +38,15 @@ export default function Trade() {
       const { data: inventory } = await api.get(
         `api/people/${survivorId}/properties.json`
       );
+      console.log(inventory);
+      if (inventory[0] === undefined) {
+        alert("No items on inventory");
+      }
       return inventory;
     } catch (err) {
       if (err) {
         console.log("Inventory Not found");
+        alert("Survivor not found");
         return [];
       }
     }
@@ -57,8 +63,11 @@ export default function Trade() {
 
   function mapSurvivor1InventoryItems(inventory, tradeInventory) {
     return inventory ? (
-      <div>
-        <ul>
+      <div className="items-wrapper">
+        <p style={{ color: "#FFF", "font-size": "medium" }}>
+          Total: {pointsTradeInventory1}
+        </p>
+        <ul className="item-list">
           {inventory.map((inventoryItem, index) => {
             return (
               <li key={index}>
@@ -90,15 +99,17 @@ export default function Trade() {
             );
           })}
         </ul>
-        <p>Total: {pointsTradeInventory1}</p>
       </div>
     ) : null;
   }
 
   function mapSurvivor2InventoryItems(inventory, tradeInventory) {
     return inventory ? (
-      <div>
-        <ul>
+      <div className="items-wrapper">
+        <p style={{ color: "#FFF", "font-size": "medium" }}>
+          Total: {pointsTradeInventory2}
+        </p>
+        <ul className="item-list">
           {inventory.map((inventoryItem, index) => {
             return (
               <li key={index}>
@@ -135,22 +146,21 @@ export default function Trade() {
             );
           })}
         </ul>
-        <p>Total: {pointsTradeInventory2}</p>
       </div>
     ) : null;
   }
 
   async function handleTrade() {
-    let payment = [];
+    let pick = [];
     tradeInventory1.forEach((item, index) => {
       if (item !== "0") {
-        payment.push(`${survivor1Inventory[index].item.name}:${item}`);
+        pick.push(`${survivor1Inventory[index].item.name}:${item}`);
       }
     });
-    let pick = [];
+    let payment = [];
     tradeInventory2.forEach((item, index) => {
       if (item !== "0") {
-        pick.push(`${survivor2Inventory[index].item.name}:${item}`);
+        payment.push(`${survivor2Inventory[index].item.name}:${item}`);
       }
     });
 
@@ -161,12 +171,20 @@ export default function Trade() {
         payment: payment.join(";"),
       },
     };
-    const response = await api.post(
-      `api/people/${idSurvivor1}/properties/trade_item.json`,
-      data
-    );
 
-    console.log(response);
+    try{
+      const response = await api.post(
+        `api/people/${idSurvivor1}/properties/trade_item.json`,
+        data
+      );
+      if (response.status === 204) {
+        alert("The trade has been done successfully");
+        history.push("/landing");
+      }
+    }
+    catch(err){
+      alert("Error on trade, check inventory items quantity")
+    }
   }
 
   useEffect(() => {
@@ -176,11 +194,11 @@ export default function Trade() {
   return (
     <div className="trade-wrapper">
       <div className="trade-container">
-        <p>Survivor 1 id:</p>
         <input
           type="text"
           value={idSurvivor1}
           onChange={(e) => setIdSurvivor1(e.target.value)}
+          placeholder="Survivor 1 ID"
         />
         <button
           onClick={async () => {
@@ -191,9 +209,8 @@ export default function Trade() {
         >
           Search
         </button>
+        {mapSurvivor1InventoryItems(survivor1Inventory, tradeInventory1)}
       </div>
-
-      {mapSurvivor1InventoryItems(survivor1Inventory, tradeInventory1)}
 
       <button
         disabled={
@@ -207,10 +224,10 @@ export default function Trade() {
         Do the Trade
       </button>
       <div className="trade-container">
-        <p>Survivor 2 Full name:</p>
         <input
           type="text"
           value={nameSurvivor2}
+          placeholder="Survivor 2 full name"
           onChange={(e) => {
             setNameSurvivor(e.target.value);
           }}

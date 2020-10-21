@@ -48,23 +48,33 @@ export default function Reports() {
       <div className="reports-container">
         <h3>Most recent survivor's reports:</h3>
         <p>
-          Total of survivors infected: <b>{avgInfected * 100}%</b>
+          Total of survivors infected: <b>{(avgInfected * 100).toFixed(1)}%</b>
         </p>
         <p>
-        Total of survivors not infected: <b>{avgNonInfected * 100}%</b>
+          Total of survivors not infected:{" "}
+          <b>{(avgNonInfected * 100).toFixed(1)}%</b>
         </p>
         <p>Average amout of resources by survivor:</p>
 
         <div className="resources-div">
-          <p>Fiji Water: <b>{fijiiWater ? fijiiWater.toFixed(1) : "0"}</b></p>
-          <p>Campbell Soup: <b>{campbellSoup ? campbellSoup.toFixed(1) : "0"}</b></p>
           <p>
-            First Aid Pouch: <b>{firstAidPouch ? firstAidPouch.toFixed(1) : "0"}</b>
+            Fiji Water: <b>{fijiiWater ? fijiiWater.toFixed(1) : "0"}</b>
           </p>
-          <p>AK47: <b>{ak47 ? ak47.toFixed(1) : "0"}</b></p>
+          <p>
+            Campbell Soup: <b>{campbellSoup ? campbellSoup.toFixed(1) : "0"}</b>
+          </p>
+          <p>
+            First Aid Pouch:{" "}
+            <b>{firstAidPouch ? firstAidPouch.toFixed(1) : "0"}</b>
+          </p>
+          <p>
+            AK47: <b>{ak47 ? ak47.toFixed(1) : "0"}</b>
+          </p>
         </div>
 
-        <p>Points lost due to infected survivors: <b>{lostPoints}</b></p>
+        <p>
+          Points lost due to infected survivors: <b>{lostPoints}</b>
+        </p>
       </div>
     </div>
   );

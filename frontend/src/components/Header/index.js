@@ -1,13 +1,12 @@
-import React from 'react';
+import React from "react";
 
-import './styles.css'
+import "./styles.css";
 
-export default function Header(){
-
-    return ( 
+export default function Header() {
+  return (
     <div className="header-wrapper">
-        <p>The Resident</p><p>Zombie</p>
+      <p>The Resident</p>
+      <p>Zombie</p>
     </div>
-    );
-
+  );
 }

@@ -5,7 +5,7 @@ import Home from './pages/Home';
 import Register from './pages/Register';
 import Landing from './pages/Landing';
 import UpdateLocation from './pages/UpdateLocation';
-import Trade from './pages/Trade';
+import TradePage from './pages/TradePage';
 import FlagInfected from './pages/FlagInfected';
 
 export default function Routes(){
@@ -17,7 +17,7 @@ export default function Routes(){
                 <Route path="/register" component={Register}/>
                 <Route path="/update" component={UpdateLocation}/>
                 <Route path="/flaginfected" component={FlagInfected}/>
-                <Route path="/trade" component={Trade}/>
+                <Route path="/trade" component={TradePage}/>
             </Switch>
         </BrowserRouter>
     )

@@ -29,10 +29,16 @@ export default function UpdateLocation() {
 
   async function handleUpdate(e) {
     e.preventDefault();
-
+    if(position.latitude === "0"){
+      alert("Please select a new position to update")
+      return
+    }
+    if(survivorId === ""){
+      alert("Please enter a survivor ID")
+      return 
+    }
     try {
       const { data: survivor } = await api.get(`api/people/${survivorId}.json`);
-
       const data = {
         person: {
           name: survivor.name,
@@ -77,6 +83,7 @@ export default function UpdateLocation() {
             type="text"
             placeholder="Surivor ID"
             value={survivorId}
+            required={true}
             onChange={(e) => setSurvivorId(e.target.value)}
           />
           <div className="map-container">

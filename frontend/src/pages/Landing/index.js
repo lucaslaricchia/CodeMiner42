@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 import Reports from "../../components/Reports";
 import Header from "../../components/Header";
@@ -15,28 +15,33 @@ export default function Landing() {
         <div className="description">
           <h2>Hello fellow survivor!</h2>
           <h3>
-            TRZ (The Resident Zombie) is a community with a dream to survive
+            Here is a community where you can stay safe from T-Virus
           </h3>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            Lets unite the remaining humans, to build a community where we can stay safe from
+            "Influenzer T-Virus".
+            Here we can share our last location safely, and trade items with another survivors!
+            
           </p>
         </div>
         <div className="menu">
           <p>New Survivor? Register here!</p>
-          <Link to="/register"><button>Register</button></Link>
+          <Link to="/register">
+            <button>Register</button>
+          </Link>
           <p>If you want to register a new location click here</p>
-          <Link to="/update"><button>Update Location</button></Link>
+          <Link to="/update">
+            <button>Update Location</button>
+          </Link>
           <p>If you suspect that anyone is infected click here</p>
-          <Link to="/flaginfected"><button>Flag Infected</button></Link>
+          <Link to="/flaginfected">
+            <button>Flag Infected</button>
+          </Link>
           <p>To trade items with another survivor click here</p>
-          <Link to="/trade"><button>Trade Items</button></Link>
-          <Reports/>
+          <Link to="/trade">
+            <button>Trade Items</button>
+          </Link>
+          <Reports />
         </div>
       </div>
       <Footer />

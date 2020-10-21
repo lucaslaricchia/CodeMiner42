@@ -1,13 +1,40 @@
-.wrapper{
+.trade-wrapper{
     display: flex;
-    width: 700px;
-
     justify-content: space-between  ;
+}
+.trade-container input{
+    height: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.trade-container button{
+    height: 40px;
+    margin-right: 10px;
+}
+
+.trade-container .items-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.trade-container .item-list{
+    width: 80%;
+    height: 190px;
+    list-style: none;
+    margin-top: 10px;
+    background: #FFF;
+    border-radius: 8px;
+    padding: 10px
 }
 
 .trade-container .item{
     display: flex;
-    align-items: center;
+    margin-top: 2px;
     justify-content: space-between;
 }
 .trade-container .item input{
