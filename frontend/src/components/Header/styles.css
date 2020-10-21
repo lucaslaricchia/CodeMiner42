@@ -1,0 +1,23 @@
+.header-wrapper{
+    width: 100%;
+    height: 100px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+.header-wrapper p {
+
+    font-family: "Permanent Marker";
+    font-size: 50px;
+    color: rgb(0, 0, 0);
+    word-spacing: 0.2em;
+    letter-spacing: 0.17em;
+
+}
+
+.header-wrapper p + p{
+    text-shadow: 2px 3px 0px #153606;
+    color:#fa0000;
+}

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
-import { compact, isEmpty } from "lodash";
+import { isEmpty } from "lodash";
 import api from "../../services/api";
 import "./styles.css";
 
@@ -14,8 +14,6 @@ export default function Trade() {
   const [tradeInventory2, setTradeInventory2] = useState([]);
   const [pointsTradeInventory1, setPointsTradeInventory1] = useState(0);
   const [pointsTradeInventory2, setPointsTradeInventory2] = useState(0);
-  const [stringPick, setStringPick] = useState("");
-  const [stringPayment, setStringPayment] = useState("");
 
   async function loadSuvivors() {
     const { data } = await api.get("api/people.json");
@@ -149,7 +147,6 @@ export default function Trade() {
         payment.push(`${survivor1Inventory[index].item.name}:${item}`);
       }
     });
-
     let pick = [];
     tradeInventory2.forEach((item, index) => {
       if (item !== "0") {
@@ -158,10 +155,10 @@ export default function Trade() {
     });
 
     const data = {
-      "consumer": {
-        "name": nameSurvivor2,
-        "pick": pick.join(";"),
-        "payment": payment.join(";"),
+      consumer: {
+        name: nameSurvivor2,
+        pick: pick.join(";"),
+        payment: payment.join(";"),
       },
     };
     const response = await api.post(
@@ -177,7 +174,7 @@ export default function Trade() {
   }, []);
 
   return (
-    <div className="wrapper">
+    <div className="trade-wrapper">
       <div className="trade-container">
         <p>Survivor 1 id:</p>
         <input

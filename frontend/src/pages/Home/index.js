@@ -13,7 +13,7 @@ export default function Landing() {
                 <main>
                     <h1>Need help surviving this plague?</h1>
                 </main>
-                <Link to="/register" className="enter-app">
+                <Link to="/landing" className="enter-app">
                     <FiArrowRight size={26} color="rgba(0, 0, 0, 0.6)" />
                 </Link>
 

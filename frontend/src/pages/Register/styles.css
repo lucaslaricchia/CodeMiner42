@@ -1,29 +1,36 @@
 .register-container {
-  width: 100%;
+  width: 100vw;
   max-width: 1120px;
   height: 100vh;
   margin: 0 auto;
-
-  display: flex;
-  flex-direction: column;
+  
+  display: grid;
+  grid-template-rows: 1fr 5fr 1fr;
   align-items: center;
   justify-content: center;
+  
 }
 
 .register-container .content {
   width: 100%;
-  padding: 96px;
-  background: none;
-
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background:rgba(252, 0, 0, 0.404);
+  margin-top: 20px;
   border-radius: 8px;
-
+  
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   text-align: center;
-  position: relative;
 }
+
+.register-container .content .name-age{
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  column-gap: 10px;
+}
+
 
 .register-container .content section {
   width: 100%;
@@ -36,16 +43,7 @@
   color: #eb0b0b;
 }
 
-.register-container .content p {
-  font-family: "Macondo";
-  font-size: 70px;
-  color: #40be06;
-  line-height: 32px;
-  font-weight: bold;
-  word-spacing: 0.2em;
-  letter-spacing: 0.17em;
-  margin-bottom: 30px;
-}
+
 
 .register-container .content form {
   width: 100%;
@@ -54,13 +52,13 @@
 
 .register-container .content form h2 {
   font-size: 24px;
-  color: rgb(241, 228, 228);
+  color: rgb(0, 0, 0);
 }
 
 .register-container .content form h3 {
     font-size: 20px;
     margin-bottom: 5px;
-    color: rgb(241, 228, 228);
+    color: rgb(0, 0, 0);
   }
 
 .register-container .content form input {
@@ -89,20 +87,19 @@
 
 .register-container .content .button-select {
   display: flex;
+  background:none;
 }
 
 .register-container .content .button-select button {
   width: 50%;
   height: 50px;
   background: #ffffff;
-  border: 1px solid #f6f6f7;
   color: #010202;
   cursor: pointer;
 }
 
 .register-container .content .button-select button.active {
-  background: #40be06;
-  border: 1px solid #a1e9c5;
+  background: #00699A;
   color: black;
 }
 
@@ -113,4 +110,44 @@
 .register-container .content .button-select button:last-child {
   border-radius: 0px 8px 8px 0px;
   border-left: 0;
+}
+
+.register-container .content .inventory-items {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0px 0px;
+
+
+  background: #FFF;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.register-container .content .inventory-items .item{
+  display: grid;
+  grid-template-columns: 1.3fr 0.5fr;
+  margin: 5px 5px;
+}
+
+.register-container .content .inventory-items .item p{
+  font-size: 20px;
+  color: rgb(0, 0, 0);
+  
+  text-align: start;
+}
+
+.register-container .content .inventory-items .item input{
+  height: 40px;
+  padding: 0;
+  margin: 0;
+
+  border: none;
+  background: rgb(207, 106, 106);
+  text-align: end;
+}
+
+.button{
+  width: 200px;
+  height: 50px;
 }

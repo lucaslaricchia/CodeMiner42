@@ -7,6 +7,8 @@ import api from "../../services/api";
 import "leaflet/dist/leaflet.css";
 import "./styles.css";
 import mapIcon from "../../utils/mapIcon";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
 export default function Register() {
   const [name, setName] = useState("");
@@ -17,9 +19,12 @@ export default function Register() {
     latitude: "",
     longitude: "",
   });
-  const [items, setItems] = useState(
-    "Fiji Water:10;Campbell Soup:5;First Aid Pouch:10;AK47: 1"
-  );
+  const [items, setItems] = useState({
+    "Fiji Water": 0,
+    "Campbell Soup": 0,
+    "First Aid Pouch": 0,
+    AK47: 0,
+  });
   const history = useHistory();
 
   function handleMapClick(e) {
@@ -31,14 +36,20 @@ export default function Register() {
 
   async function handleRegister(e) {
     e.preventDefault();
-    setItems({
-      "Fijii Water": "10",
-      AK47: "3",
+
+    let itemString = [];
+
+    Object.keys(items).forEach((key) => {
+      if (items[key] !== "0") {
+        itemString.push(`${key}:${items[key]}`);
+      }
     });
+    console.log(items);
+    console.log(itemString);
 
     const lonlat = `POINT(${parseFloat(position.longitude).toFixed(
       3
-    )} ${parseFloat(position.latitude).toFixed(3)})`;
+    )} ${parseFloat(position.latitude + 0.1).toFixed(3)})`;
     let gender = "";
 
     if (isFemale) {
@@ -52,7 +63,7 @@ export default function Register() {
       age,
       gender,
       lonlat,
-      items,
+      items: itemString.join(";"),
     };
 
     try {
@@ -76,27 +87,23 @@ export default function Register() {
 
   return (
     <div className="register-container">
+      <Header />
       <div className="content">
-        <p>The Resident Zombie</p>
-        <section>
-          <Link className="back-link" to="/">
-            <FiArrowLeft size={16} color="#e02041" />
-            Voltar
-          </Link>
-        </section>
-
         <form onSubmit={handleRegister}>
           <h2>Enter the survivor's info bellow</h2>
-          <input
-            placeholder="Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <input
-            placeholder="Age"
-            value={age}
-            onChange={(e) => setAge(e.target.value)}
-          />
+          <div className="name-age">
+            <input
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <input
+              placeholder="Age"
+              value={age}
+              onChange={(e) => setAge(e.target.value)}
+            />
+          </div>
+
           <div class="map-container">
             <Map
               center={
@@ -138,9 +145,58 @@ export default function Register() {
           </div>
 
           <h3>How many items do you have?</h3>
-          <button className="button">Sign up</button>
+          <div className="inventory-items">
+            <div className="item">
+              <p>Fijii Water: </p>
+              <input
+                value={items["Fiji Water"]}
+                onChange={(e) =>
+                  setItems({ ...items, "Fiji Water": e.target.value })
+                }
+                min="0"
+                max="99"
+                type="number"
+              />
+            </div>
+            <div className="item">
+              <p>Campbell Soup: </p>
+              <input
+                value={items["Campbell Soup"]}
+                onChange={(e) =>
+                  setItems({ ...items, "Campbell Soup": e.target.value })
+                }
+                type="number"
+                min="0"
+                max="99"
+              />
+            </div>
+            <div className="item">
+              <p>First Aid Pouch: </p>
+              <input
+                value={items["First Aid Pouch"]}
+                onChange={(e) =>
+                  setItems({ ...items, "First Aid Pouch": e.target.value })
+                }
+                type="number"
+                min="0"
+                max="99"
+              />
+            </div>
+            <div className="item">
+              <p>AK47: </p>
+              <input
+                value={items["AK47"]}
+                onChange={(e) => setItems({ ...items, AK47: e.target.value })}
+                type="number"
+                min="0"
+                max="99"
+              />
+            </div>
+          </div>
+          <button className="button">Register</button>
         </form>
       </div>
+      <Footer />
     </div>
   );
 }
