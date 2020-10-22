@@ -1,4 +1,5 @@
-import { Table } from 'typeorm'
+import { query } from 'express'
+import { Table, TableForeignKey } from 'typeorm'
 
 export class createSurvivors1602801187641 {
   async up(queryRunner) {
@@ -33,6 +34,7 @@ export class createSurvivors1602801187641 {
           {
             name: 'infected_reports',
             type: 'integer',
+            default: 0,
           },
           {
             name: 'latitude',
@@ -46,9 +48,19 @@ export class createSurvivors1602801187641 {
             scale: 10,
             precision: 2,
           },
+          {
+            name: 'inventoryId',
+            type: 'integer',
+          },
         ],
       })
     )
+
+    await queryRunner.createForeignKey("survivors", new TableForeignKey({
+      columnNames: ["inventoryId"],
+      referencedColumnNames: ["id"],
+      referencedTableName: "inventory"
+    }))
   }
 
   async down(queryRunner) {

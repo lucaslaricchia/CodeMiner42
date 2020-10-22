@@ -6,12 +6,12 @@ import {
   JoinColumn,
 } from 'typeorm'
 
-import Inventory from './Inventory'
+import { Inventory } from './Inventory'
 
-@Entity('survivors')
-export default class Survivor {
+@Entity("survivors")
+export class Survivor {
   @PrimaryGeneratedColumn('increment')
-  id = null
+  id  = undefined
 
   @Column('varchar')
   name = ''
@@ -33,4 +33,8 @@ export default class Survivor {
 
   @Column('decimal')
   longitude = 0
+
+  @OneToOne(type => Inventory, inventory => inventory.survivor)
+  @JoinColumn()
+  inventory = undefined;
 }

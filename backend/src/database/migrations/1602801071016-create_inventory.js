@@ -1,10 +1,10 @@
 import { Table } from 'typeorm'
 
-export class createItem1602821782250 {
+export class createInventory1602801071016 {
   async up(queryRunner) {
     await queryRunner.createTable(
       new Table({
-        name: 'item',
+        name: 'inventory',
         columns: [
           {
             name: 'id',
@@ -15,11 +15,19 @@ export class createItem1602821782250 {
             generationStrategy: 'increment',
           },
           {
-            name: 'name',
-            type: 'varchar',
+            name: 'fijii_water',
+            type: 'integer',
           },
           {
-            name: 'points',
+            name: 'campbell_soup',
+            type: 'integer',
+          },
+          {
+            name: 'first_aid_pouch',
+            type: 'integer',
+          },
+          {
+            name: 'ak47',
             type: 'integer',
           },
         ],
@@ -28,6 +36,6 @@ export class createItem1602821782250 {
   }
 
   async down(queryRunner) {
-    await queryRunner.dropTable('item')
+    await queryRunner.dropTable('inventory')
   }
 }

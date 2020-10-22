@@ -1,13 +1,13 @@
 {
    "type" : "sqlite",
-   "database" : "./src/database/database.sqlite",
+   "database" : "src/database/database.sqlite",
    "migrations":[
-       "./src/database/migrations/*.js"
+       "src/database/migrations/*.js"
    ],
    "entities": [
-       "./src/models/*.js"
+       "src/models/*.js"
    ],
    "cli": {
-       "migrationsDir": "./src/database/migrations"
+       "migrationsDir": "../src/database/migrations"
    }
 }

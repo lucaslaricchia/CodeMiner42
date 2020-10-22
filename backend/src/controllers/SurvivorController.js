@@ -1,7 +1,8 @@
 import { getRepository } from 'typeorm'
 import survivorView from '../views/survivors_view'
 import * as Yup from 'yup'
-import Inventory from '../models/Inventory'
+import { Inventory } from '../models/Inventory'
+import { Survivor } from '../models/Survivor'
 
 async function _validateSurvivor(data) {
   const schema = Yup.object().shape({
@@ -12,6 +13,12 @@ async function _validateSurvivor(data) {
     infected_reports: Yup.number().required(),
     latitude: Yup.number().required(),
     longitude: Yup.number().required(),
+    inventory: Yup.object().shape({
+      fijii_water: Yup.number().required().default(5),
+      campbell_soup: Yup.number().required().default(0),
+      first_aid_pouch: Yup.number().required().default(0),
+      ak47: Yup.number().required().default(0),
+    }),
   })
 
   await schema.validate(data, {
@@ -22,48 +29,63 @@ async function _validateSurvivor(data) {
 export default {
   async show(request, response) {
     const { id } = request.params
-
     const survivorsRepository = getRepository('survivors')
 
-    const survivor = await survivorsRepository.findOneOrFail(id)
-
-    return response.json(survivorView.render(survivor))
+    try {
+      const survivor = await survivorsRepository.findOneOrFail(id)
+      return response.json(survivorView.render(survivor))
+    } catch (err) {
+      return response.status(404).json({ error: 'Not Found' })
+    }
   },
 
   async update(request, response) {
     const { id } = request.params
     const survivorsRepository = getRepository('survivors')
-    let survivor = await survivorsRepository.findOneOrFail(id)
 
-    delete request.body.id
-    delete request.body.name
-    Object.keys(request.body).forEach((key) => {
-      const item = request.body[key]
-      if (item) {
-        survivor[key] = item
-      }
-    })
-    survivor = await survivorsRepository.save(survivor)
-    return response.status(201).json(survivor)
+    try {
+      let survivor = await survivorsRepository.findOneOrFail(id)
+      delete request.body.id
+      delete request.body.name
+      delete request.body.inventory
+      Object.keys(request.body).forEach((key) => {
+        const item = request.body[key]
+        if (item) {
+          survivor[key] = item
+        }
+      })
+      survivor = await survivorsRepository.save(survivor)
+      return response.json(survivor)
+    } catch (err) {
+      return response.status(404).json({ error: 'ID Not Found' })
+    }
   },
 
   async index(request, response) {
-    const survivorsRepository = getRepository('survivors')
+    const survivorsRepository = getRepository(Survivor)
     const survivors = await survivorsRepository.find()
 
     return response.json(survivorView.renderMany(survivors))
   },
 
   async create(request, response) {
-    const survivorsRepository = getRepository('survivors')
+    const survivorsRepository = getRepository(Survivor)
+    const inventoryRepository = getRepository(Inventory)
+    try {
+      await _validateSurvivor(request.body)
+    } catch (err) {
+      return response.status(406).json({ error: 'Not Acceptable' })
+    }
 
-    await _validateSurvivor(request.body)
+    let inventory = await inventoryRepository.create(request.body.inventory)
+    await inventoryRepository.save(inventory)
 
-    let survivor = await survivorsRepository.create(request.body)
+    let survivor = survivorsRepository.create(request.body)
 
-    survivor.inventory = new Inventory()
+    survivor.inventory = inventory
+
     await survivorsRepository.save(survivor)
 
-    return response.status(201).json(survivor)
+    return response.json(survivor)
   },
 }
