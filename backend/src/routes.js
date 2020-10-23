@@ -11,7 +11,4 @@ routes.put('/survivor/:id', SurvivorController.update)
 
 routes.get('/reports/infected', ReportsController.infected)
 routes.get('/reports/non_infected', ReportsController.nonInfected)
-routes.get('/reports/survivors_inventory', ReportsController.survivorsInventory)
-routes.get('/reports/infected_points', ReportsController.infectedPoints)
-
 export default routes

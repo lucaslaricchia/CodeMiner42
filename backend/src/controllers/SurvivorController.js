@@ -84,7 +84,7 @@ export default {
 
     survivor.inventory = inventory
 
-    await survivorsRepository.save(survivor)
+    survivor = await survivorsRepository.save(survivor)
 
     return response.json(survivor)
   },
